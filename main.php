@@ -1,9 +1,4 @@
-<?php
-session_start();
-if(empty($_SESSION['username_eklinik'])) {
-    header('Location: login');
-}
-?>
+
 <!doctype html>
 <html lang="en">
 
