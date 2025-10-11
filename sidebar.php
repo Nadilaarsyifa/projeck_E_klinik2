@@ -15,31 +15,31 @@
                     <ul class="navbar-nav nav-pills flex-column justify-content-end flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x'] == 'beranda' || !isset($_GET['x'])) ? 'active link-light' : 'link-dark'; ?>"
-                                aria-current="page" href="beranda">Beranda</a>
+                                aria-current="page" href="beranda"><i class="bi bi-house-door"></i> Beranda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='konsultasi') ? 'active link-light' : 'link-dark'; ?>"
-                                href="konsultasi">Konsultasi</a>
+                                href="konsultasi"><i class="bi bi-chat-dots"></i> Konsultasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='riwayatkonsultasi') ? 'active link-light' : 'link-dark'; ?>"
-                                href="riwayatkonsultasi">Riwayat Konsultasi</a>
+                                href="riwayatkonsultasi"><i class="bi bi-journal-text"></i> Riwayat Konsultasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='datamedis') ? 'active link-light' : 'link-dark'; ?>"
-                                href="datamedis">Data Medis</a>
+                                href="datamedis"><i class="bi bi-clipboard-pulse"></i> Data Medis</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='konsultasimasuk') ? 'active link-light' : 'link-dark'; ?>"
-                                href="konsultasimasuk">Konsultasi Masuk</a>
+                                href="konsultasimasuk"><i class="bi bi-chat-left-text"></i> Konsultasi Masuk</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='user') ? 'active link-light' : 'link-dark'; ?>"
-                                href="user">User</a>
+                                href="user"><i class="bi bi-people"></i> User</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='report') ? 'active link-light' : 'link-dark'; ?>"
-                                href="report">Report</a>
+                                href="report"><i class="bi bi-clipboard-data"></i> Report</a>
                         </li>
                     </ul>
                 </div>
