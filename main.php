@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(empty($_SESSION['username_eklinik'])){
+        header('location:login');
+    }
+?>
 
 <!doctype html>
 <html lang="en">
