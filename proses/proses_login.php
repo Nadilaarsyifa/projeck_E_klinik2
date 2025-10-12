@@ -8,6 +8,7 @@ include "connect.php";
         $hasil = mysqli_fetch_array($query);
         if($hasil){
             $_SESSION['username_eklinik'] = $username;
+            $_SESSION['role_eklinik'] = $hasil['role'];
             header('location:../beranda');
         }else{?>
 <script>

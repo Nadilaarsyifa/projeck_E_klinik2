@@ -7,18 +7,18 @@ Bismilahirrahmanirrahim, حَسْبُنَا اللهُ وَنِعْمَ الْو
 sebuah aplikasi yang dapat digunakan untuk melakukan atau berobat ke klinik 
 melalui daring.
 
-# Mahasiswa
-    - melakukan konsultasi
-    - melihat balasan petugas klinik
-    - mengapdate dan men-delete data medis nya
-    - melihat riwayat berobatnya
+# Mahasiswa(3)
+    - melakukan konsultasi                    -konsultasi
+    - melihat balasan petugas klinik           -konsultasi masuk
+    - mengapdate dan men-delete data medis nya -data medis
+    - melihat riwayat berobatnya               -riwayatkonsultasi
     
-# Petugas klinik
-    - membalas konsultasi mahasiswa
-    - melihat data medis mahasiswa
+# Petugas klinik(2)
+    - membalas konsultasi mahasiswa    -konsultasi masuk
+    - melihat data medis mahasiswa      -data medis
 
-# Admin
-    - mengapus dan menambahkan dokter dan mahasiswa
-    - melihat seluruh riwayat konsultasi 
-    - melihat seluruh data medis mahasiswa
-    - Report
+# Admin(1)
+    - mengapus dan menambahkan dokter dan mahasiswa  -user
+    - melihat seluruh riwayat konsultasi            -riwayat konsultasi
+    - melihat seluruh data medis mahasiswa           -data medis
+    - Report                                         -report
