@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2025 at 02:55 AM
+-- Generation Time: Oct 19, 2025 at 03:07 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -126,126 +126,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nama`, `role`) VALUES
-(1, '2023573010099', '5f4dcc3b5aa765d61d8327deb882cf99', 'Administrator Klinik', 'admin');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `data_medis_mahasiswa`
---
-ALTER TABLE `data_medis_mahasiswa`
-  ADD PRIMARY KEY (`id_data_medis`),
-  ADD KEY `nim` (`nim`);
-
---
--- Indexes for table `konsultasi`
---
-ALTER TABLE `konsultasi`
-  ADD PRIMARY KEY (`id_konsultasi`),
-  ADD KEY `nim` (`nim`),
-  ADD KEY `id_petugas` (`id_petugas`);
-
---
--- Indexes for table `mahasiswa`
---
-ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`nim`),
-  ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `petugas_klinik`
---
-ALTER TABLE `petugas_klinik`
-  ADD PRIMARY KEY (`id_petugas`),
-  ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `tindak_lanjut`
---
-ALTER TABLE `tindak_lanjut`
-  ADD PRIMARY KEY (`id_tindak_lanjut`),
-  ADD KEY `id_konsultasi` (`id_konsultasi`),
-  ADD KEY `nim` (`nim`),
-  ADD KEY `id_petugas` (`id_petugas`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `data_medis_mahasiswa`
---
-ALTER TABLE `data_medis_mahasiswa`
-  MODIFY `id_data_medis` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `konsultasi`
---
-ALTER TABLE `konsultasi`
-  MODIFY `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `petugas_klinik`
---
-ALTER TABLE `petugas_klinik`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tindak_lanjut`
---
-ALTER TABLE `tindak_lanjut`
-  MODIFY `id_tindak_lanjut` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `data_medis_mahasiswa`
---
-ALTER TABLE `data_medis_mahasiswa`
-  ADD CONSTRAINT `data_medis_mahasiswa_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `konsultasi`
---
-ALTER TABLE `konsultasi`
-  ADD CONSTRAINT `konsultasi_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `konsultasi_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `petugas_klinik` (`id_petugas`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `mahasiswa`
---
-ALTER TABLE `mahasiswa`
-  ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `petugas_klinik`
---
-ALTER TABLE `petugas_klinik`
-  ADD CONSTRAINT `petugas_klinik_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `tindak_lanjut`
---
-ALTER TABLE `tindak_lanjut`
-  ADD CONSTRAINT `tindak_lanjut_ibfk_1` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tindak_lanjut_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tindak_lanjut_ibfk_3` FOREIGN KEY (`id_petugas`) REFERENCES `petugas_klinik` (`id_petugas`) ON DELETE SET NULL ON UPDATE CASCADE;
+(1, '2023573010099', '5f4dcc3b5aa765d61d8327deb882cf99', 'Administrator Klinik', 'admin'),
+(2, '2023573010011', '5f4dcc3b5aa765d61d8327deb882cf99', 'Administrator Klinik', 'petugas klinik'),
+(3, '2023573010012', '5f4dcc3b5aa765d61d8327deb882cf99', 'Administrator Klinik', 'mahasiswa');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
