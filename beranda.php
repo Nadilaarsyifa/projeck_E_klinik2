@@ -84,7 +84,7 @@
                     ],
                     [
                         'foto' => 'assets/img/dokter2.png',
-                        'nama' => 'Dr. Sinta Pratama',
+                        'nama' => 'Dr. Nilam Cahaya Safitri',
                         'spesialis' => 'Psikologi',
                         'hari' => 'Selasa & Kamis',
                         'jam' => '09:00 - 14:00'
