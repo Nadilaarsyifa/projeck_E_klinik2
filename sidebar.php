@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="assets/css/style.css">
+
 <div class="col-lg-3">
     <nav class="navbar navbar-expand-lg bg-light rounded border mt-2">
         <div class="container-fluid">
@@ -8,7 +10,7 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel" style="width: 250px">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">menu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -33,7 +35,7 @@
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='datamedis') ? 'active link-light' : 'link-dark'; ?>"
                                 href="datamedis"><i class="bi bi-clipboard-pulse"></i> Data Medis</a>
                         </li>
-                        <?php if($hasil['role'] =='petugas klinik' || $hasil['role'] == 'mahasiswa'){?>
+                        <?php if($hasil['role'] =='petugas klinik'){?>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='konsultasimasuk') ? 'active link-light' : 'link-dark'; ?>"
                                 href="konsultasimasuk"><i class="bi bi-chat-left-text"></i> Konsultasi Masuk</a>

@@ -127,4 +127,35 @@ CREATE TABLE tindak_lanjut (
 -- =======================
 -- Trigger: Tambah otomatis mahasiswa/petugas setelah user dibuat
 -- =======================
+DELIMITER $$
 
+CREATE TRIGGER after_user_insert
+AFTER INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    -- Jika role = mahasiswa, otomatis buat data di tabel mahasiswa
+    IF NEW.role = 'mahasiswa' THEN
+        INSERT INTO mahasiswa (nim, id_user)
+        VALUES (CAST(NEW.username AS UNSIGNED), NEW.id_user);
+    END IF;
+
+    -- Jika role = petugas klinik, otomatis buat data di tabel petugas_klinik
+    IF NEW.role = 'petugas klinik' THEN
+        INSERT INTO petugas_klinik (id_petugas, id_user)
+        VALUES (NEW.username, NEW.id_user);
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- =======================
+-- Data Awal User
+-- =======================
+INSERT INTO `user` (username, password, role) VALUES
+('2023573010099', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin'),
+('2023573010011', '5f4dcc3b5aa765d61d8327deb882cf99', 'petugas klinik'),
+('2023573010012', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa');
+
+-- =========================================================
+-- ✅ Semua relasi, tipe data, dan trigger sudah stabil & optimal
+-- =========================================================

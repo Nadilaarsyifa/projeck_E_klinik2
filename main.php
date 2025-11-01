@@ -1,13 +1,13 @@
 <?php
-    //session_start();
-    if(empty($_SESSION['username_eklinik'])){
-        header('location:login');
-    }
-    include "proses/connect.php";
-    $query = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username_eklinik]'");
-    $hasil = mysqli_fetch_array($query);
+//session_start();
+if (empty($_SESSION['username_eklinik'])) {
+    header('location:login');
+}
+include "proses/connect.php";
+$query = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username_eklinik]'");
+$hasil = mysqli_fetch_array($query);
 
-    
+
 ?>
 
 <!doctype html>
@@ -34,13 +34,15 @@
 
             <!-- Content -->
             <?php
-                include $page;
+            include $page;
             ?>
             <!--End Content  -->
         </div>
-        <div class="fixed-bottom text-center mb-2">
-            Copyright 2025 E-klinik by kelompok 2
+        <div class="fixed-bottom text-center  py-2" style="background-color: #8e959bff;">
+            Copyright 2025 E-klinik by SkyWhisper
         </div>
+
+
     </div>
 
 
