@@ -19,6 +19,16 @@ $spesialis      = isset($_POST['spesialis']) ? htmlentities($_POST['spesialis'])
 // Validasi tombol submit
 if (!empty($_POST['input_user_validate'])) {
 
+    // 🔍 Cek apakah username sudah ada
+    $check_user = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+    if (mysqli_num_rows($check_user) > 0) {
+        echo "<script>
+            alert('Username sudah ada, silakan gunakan username lain!');
+            window.location='../user';
+        </script>";
+        exit; // hentikan proses
+    }
+
     // 1️⃣ Insert ke tabel user
     $query_user = mysqli_query($conn, "
         INSERT INTO user (username, password, role)
