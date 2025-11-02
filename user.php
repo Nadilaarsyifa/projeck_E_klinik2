@@ -176,7 +176,7 @@ while ($record = mysqli_fetch_assoc($query)) {
                 });
             </script>
 
-            <?php foreach ($result as $row): 
+            <?php foreach ($result as $row):
                 $jenis_kelamin = ($row['role'] == 'mahasiswa') ? $row['m_jenis_kelamin'] : (($row['role'] == 'petugas klinik') ? $row['pk_jenis_kelamin'] : '');
                 $no_hp = ($row['role'] == 'mahasiswa') ? $row['m_no_hp'] : (($row['role'] == 'petugas klinik') ? $row['pk_no_hp'] : '');
                 $alamat = ($row['role'] == 'mahasiswa') ? $row['m_alamat'] : (($row['role'] == 'petugas klinik') ? $row['pk_alamat'] : '');
@@ -239,8 +239,9 @@ while ($record = mysqli_fetch_assoc($query)) {
                                     </div>
 
                                     <!-- Mahasiswa -->
-                                    <div style="<?php echo ($row['role']=='mahasiswa')?'':'display:none;'; ?>">
-                                        <hr><h6>Data Mahasiswa</h6>
+                                    <div style="<?php echo ($row['role'] == 'mahasiswa') ? '' : 'display:none;'; ?>">
+                                        <hr>
+                                        <h6>Data Mahasiswa</h6>
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="form-floating mb-3">
@@ -264,8 +265,9 @@ while ($record = mysqli_fetch_assoc($query)) {
                                     </div>
 
                                     <!-- Petugas Klinik -->
-                                    <div style="<?php echo ($row['role']=='petugas klinik')?'':'display:none;'; ?>">
-                                        <hr><h6>Data Petugas Klinik</h6>
+                                    <div style="<?php echo ($row['role'] == 'petugas klinik') ? '' : 'display:none;'; ?>">
+                                        <hr>
+                                        <h6>Data Petugas Klinik</h6>
                                         <div class="form-floating mb-3">
                                             <input disabled type="text" class="form-control" value="<?php echo $row['spesialis'] ?>">
                                             <label>Bagian / Spesialis</label>
@@ -280,10 +282,40 @@ while ($record = mysqli_fetch_assoc($query)) {
                         </div>
                     </div>
                 </div>
+                <!-- Akhir Modal View -->
+                <!-- Modal Delete -->
+                <div class="modal fade" id="ModalDeleteUser_<?php echo $row['username']; ?>" tabindex="-1" aria-labelledby="deleteLabel_<?php echo $row['username']; ?>" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger text-white">
+                                <h5 class="modal-title" id="deleteLabel_<?php echo $row['username']; ?>">Hapus User</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
 
+                            <div class="modal-body">
+                                <p>Apakah kamu yakin ingin menghapus user berikut?</p>
+                                <p class="mb-1"><strong>Username:</strong> <?php echo $row['username']; ?></p>
+                                <p class="mb-0"><strong>Nama:</strong> <?php echo $row['nama']; ?></p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <a href="proses/proses_delete_user.php?username=<?php echo $row['username']; ?>" class="btn btn-danger">Hapus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
 
-            <?php if(empty($result)) {
+
+
+
+
+
+
+            <!-- akhir Modal delete -->
+
+            <?php if (empty($result)) {
                 echo "Data user tidak ada";
             } else { ?>
 
@@ -299,7 +331,8 @@ while ($record = mysqli_fetch_assoc($query)) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no=1; foreach($result as $row):
+                            <?php $no = 1;
+                            foreach ($result as $row):
                                 $modal_id = "ModalView_" . $row['username'];
                             ?>
                                 <tr>
@@ -309,8 +342,14 @@ while ($record = mysqli_fetch_assoc($query)) {
                                     <td><?php echo $row['role']; ?></td>
                                     <td class="d-flex">
                                         <button class="btn btn-info btn-sm me-1" data-bs-toggle="modal" data-bs-target="#<?php echo $modal_id; ?>"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-warning btn-sm me-1"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger btn-sm me-1"><i class="bi bi-trash"></i></button>
+                                        <button class="btn btn-danger btn-sm me-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#ModalDeleteUser_<?php echo $row['username']; ?>">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+
+
+
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -324,17 +363,17 @@ while ($record = mysqli_fetch_assoc($query)) {
 </div>
 
 <script>
-(() => {
-    'use strict'
-    const forms = document.querySelectorAll('.needs-validation')
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-            form.classList.add('was-validated')
-        }, false)
-    })
-})();
+    (() => {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })();
 </script>
