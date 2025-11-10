@@ -7,41 +7,51 @@
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel" style="width: 250px">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">menu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
+
                 <div class="offcanvas-body">
                     <ul class="navbar-nav nav-pills flex-column justify-content-end flex-grow-1">
+
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x'] == 'beranda' || !isset($_GET['x'])) ? 'active link-light' : 'link-dark'; ?>"
                                 aria-current="page" href="beranda"><i class="bi bi-house-door"></i> Beranda</a>
                         </li>
-                        <?php if($hasil['role']=='mahasiswa'){?>
+
+                        <?php if($hasil['role']=='mahasiswa'){ ?>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='konsultasi') ? 'active link-light' : 'link-dark'; ?>"
                                 href="konsultasi"><i class="bi bi-chat-dots"></i> Konsultasi</a>
                         </li>
-                        <?php }?>
-                         <?php if($hasil['role'] =='admin' || $hasil['role'] == 'mahasiswa'){?>
+                        <?php } ?>
+
+                        <?php if($hasil['role'] == 'mahasiswa'){ ?>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='riwayatkonsultasi') ? 'active link-light' : 'link-dark'; ?>"
                                 href="riwayatkonsultasi"><i class="bi bi-journal-text"></i> Riwayat Konsultasi</a>
                         </li>
-                        <?php }?>
+                        <?php } ?>
+
+                        <?php if ($hasil['role'] == 'petugas klinik' || $hasil['role'] == 'mahasiswa') { ?>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='datamedis') ? 'active link-light' : 'link-dark'; ?>"
                                 href="datamedis"><i class="bi bi-clipboard-pulse"></i> Data Medis</a>
                         </li>
-                        <?php if($hasil['role'] =='petugas klinik'){?>
+                        <?php } ?>
+
+                        <?php if($hasil['role'] =='petugas klinik'){ ?>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='konsultasimasuk') ? 'active link-light' : 'link-dark'; ?>"
                                 href="konsultasimasuk"><i class="bi bi-chat-left-text"></i> Konsultasi Masuk</a>
                         </li>
-                        <?php }?>
-                        <?php if($hasil['role']=='admin'){?>
+                        <?php } ?>
+
+                        <?php if($hasil['role']=='admin'){ ?>
                         <li class="nav-item">
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='user') ? 'active link-light' : 'link-dark'; ?>"
                                 href="user"><i class="bi bi-people"></i> User</a>
@@ -50,9 +60,11 @@
                             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='report') ? 'active link-light' : 'link-dark'; ?>"
                                 href="report"><i class="bi bi-clipboard-data"></i> Report</a>
                         </li>
-                        <?php  }?>
+                        <?php } ?>
+
                     </ul>
                 </div>
             </div>
+        </div>
     </nav>
 </div>

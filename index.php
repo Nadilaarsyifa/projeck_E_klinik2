@@ -23,6 +23,7 @@ if (isset($_GET['x']) && $_GET['x'] == 'beranda') {
 } elseif (isset($_GET['x']) && $_GET['x'] == 'datamedis') {
     $page = "datamedis.php";
     include "main.php";
+    
 } elseif (isset($_GET['x']) && $_GET['x'] == 'konsultasimasuk') {
     if($_SESSION['role_eklinik']=='petugas klinik' || $_SESSION['role_eklinik']=='mahasiswa'){
       $page = "konsultasimasuk.php";

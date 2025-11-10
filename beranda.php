@@ -125,15 +125,7 @@
     <div class="accordion" id="faqAccordion">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            Bagaimana cara mendaftar di E-Klinik?
-          </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Anda bisa mendaftar melalui website ini dengan mengisi formulir pendaftaran secara online.
-          </div>
-        </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
@@ -171,11 +163,6 @@
   <div class="card-body">
     <div class="row text-center">
       <div class="col-md-4 mb-3">
-        <i class="bi bi-person-check" style="font-size: 2rem; color:#14532d;"></i>
-        <h6 class="mt-2">Pendaftaran Cepat</h6>
-        <p class="text-muted">Tanpa antre, langsung daftar online.</p>
-      </div>
-      <div class="col-md-4 mb-3">
         <i class="bi bi-phone-vibrate" style="font-size: 2rem; color:#14532d;"></i>
         <h6 class="mt-2">Konsultasi Online</h6>
         <p class="text-muted">Konsultasi dari mana saja, kapan saja.</p>
@@ -189,41 +176,4 @@
   </div>
 </div>
 
-<!-- Statistik Klinik -->
-<div class="card shadow-sm mt-4 mb-4">
-  <div class="card-header text-white" style="background-color: #14532d;">
-    <i class="bi bi-bar-chart-fill me-2"></i> Statistik Klinik
-  </div>
-  <div class="card-body">
-    <div class="row text-center">
-      <div class="col-md-4">
-        <h3 class="text-success">1,200+</h3>
-        <p>Pasien Dilayani</p>
-      </div>
-      <div class="col-md-4">
-        <h3 class="text-success">2</h3>
-        <p>Dokter Spesialis</p>
-      </div>
-      <div class="col-md-4">
-        <h3 class="text-success">98%</h3>
-        <p>Tingkat Kepuasan</p>
-      </div>
-    </div>
-  </div>
-</div>
 
- <!-- Ajak Konsultasi -->
-    <div class="card shadow-sm mt-4 border-success">
-        <div class="card-header text-white" style="background-color: #14532d;">
-            <i class="bi bi-chat-dots-fill me-2"></i> Konsultasi Online
-        </div>
-        <div class="card-body text-center">
-            <h5 class="card-title mb-3">Yuk, Konsultasi dari Mana Saja!</h5>
-            <p class="card-text">
-                Kami menyediakan layanan konsultasi online untuk membantu Anda menangani keluhan kesehatan dengan lebih cepat dan mudah tanpa perlu antre.
-            </p>
-            <a href="?page=konsultasi" class="btn text-white" style="background-color: #14532d;">
-                <i class="bi bi-send-fill me-1"></i> Konsultasi Sekarang
-            </a>
-        </div>
-    </div>
