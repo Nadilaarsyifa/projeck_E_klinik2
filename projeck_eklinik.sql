@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Nov 2025 pada 16.41
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.1.25
+-- Generation Time: Nov 15, 2025 at 01:58 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_medis_mahasiswa`
+-- Table structure for table `data_medis_mahasiswa`
 --
 
 CREATE TABLE `data_medis_mahasiswa` (
@@ -39,10 +39,17 @@ CREATE TABLE `data_medis_mahasiswa` (
   `kontak_darurat` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `data_medis_mahasiswa`
+--
+
+INSERT INTO `data_medis_mahasiswa` (`id_data_medis`, `nim`, `alergi`, `gol_dar`, `riwayat_penyakit`, `tinggi_badan`, `berat_badan`, `alat_bantu`, `kontak_darurat`) VALUES
+(0, '2023573010011', 'udang', 'A', 'Lambung', 170, 50, 'kacamata', '085277147850');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `konsultasi`
+-- Table structure for table `konsultasi`
 --
 
 CREATE TABLE `konsultasi` (
@@ -59,7 +66,7 @@ CREATE TABLE `konsultasi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mahasiswa`
+-- Table structure for table `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -74,7 +81,7 @@ CREATE TABLE `mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `mahasiswa`
+-- Dumping data for table `mahasiswa`
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `jurusan`, `prodi`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_hp`) VALUES
@@ -83,7 +90,7 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `jurusan`, `prodi`, `tgl_lahir`, `jenis_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `petugas_klinik`
+-- Table structure for table `petugas_klinik`
 --
 
 CREATE TABLE `petugas_klinik` (
@@ -96,7 +103,7 @@ CREATE TABLE `petugas_klinik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `petugas_klinik`
+-- Dumping data for table `petugas_klinik`
 --
 
 INSERT INTO `petugas_klinik` (`id_petugas`, `nama`, `jenis_kelamin`, `spesialis`, `no_hp`, `alamat`) VALUES
@@ -105,7 +112,7 @@ INSERT INTO `petugas_klinik` (`id_petugas`, `nama`, `jenis_kelamin`, `spesialis`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tindak_lanjut`
+-- Table structure for table `tindak_lanjut`
 --
 
 CREATE TABLE `tindak_lanjut` (
@@ -122,7 +129,7 @@ CREATE TABLE `tindak_lanjut` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -132,118 +139,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`username`, `password`, `role`) VALUES
 ('2023573010011', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa'),
 ('2023573010023', '5f4dcc3b5aa765d61d8327deb882cf99', 'petugas klinik'),
 ('2023573010099', '6843b4ceb6136f35bc53db8bc20b6620', 'admin');
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `data_medis_mahasiswa`
---
-ALTER TABLE `data_medis_mahasiswa`
-  ADD PRIMARY KEY (`id_data_medis`),
-  ADD KEY `nim` (`nim`);
-
---
--- Indeks untuk tabel `konsultasi`
---
-ALTER TABLE `konsultasi`
-  ADD PRIMARY KEY (`id_konsultasi`),
-  ADD KEY `nim` (`nim`),
-  ADD KEY `id_petugas` (`id_petugas`);
-
---
--- Indeks untuk tabel `mahasiswa`
---
-ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`nim`);
-
---
--- Indeks untuk tabel `petugas_klinik`
---
-ALTER TABLE `petugas_klinik`
-  ADD PRIMARY KEY (`id_petugas`);
-
---
--- Indeks untuk tabel `tindak_lanjut`
---
-ALTER TABLE `tindak_lanjut`
-  ADD PRIMARY KEY (`id_tindak_lanjut`),
-  ADD KEY `id_konsultasi` (`id_konsultasi`),
-  ADD KEY `nim` (`nim`),
-  ADD KEY `id_petugas` (`id_petugas`);
-
---
--- Indeks untuk tabel `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`username`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
---
-
---
--- AUTO_INCREMENT untuk tabel `data_medis_mahasiswa`
---
-ALTER TABLE `data_medis_mahasiswa`
-  MODIFY `id_data_medis` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `konsultasi`
---
-ALTER TABLE `konsultasi`
-  MODIFY `id_konsultasi` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `tindak_lanjut`
---
-ALTER TABLE `tindak_lanjut`
-  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `data_medis_mahasiswa`
---
-ALTER TABLE `data_medis_mahasiswa`
-  ADD CONSTRAINT `fk_data_medis_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `konsultasi`
---
-ALTER TABLE `konsultasi`
-  ADD CONSTRAINT `fk_konsultasi_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_konsultasi_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `petugas_klinik` (`id_petugas`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `mahasiswa`
---
-ALTER TABLE `mahasiswa`
-  ADD CONSTRAINT `fk_mahasiswa_user` FOREIGN KEY (`nim`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `petugas_klinik`
---
-ALTER TABLE `petugas_klinik`
-  ADD CONSTRAINT `fk_petugas_user` FOREIGN KEY (`id_petugas`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tindak_lanjut`
---
-ALTER TABLE `tindak_lanjut`
-  ADD CONSTRAINT `fk_tindak_lanjut_konsultasi` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tindak_lanjut_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tindak_lanjut_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `petugas_klinik` (`id_petugas`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

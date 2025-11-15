@@ -79,15 +79,15 @@
                         'foto' => 'assets/img/dokter1.jpeg',
                         'nama' => 'Dr. Andi Wijaya',
                         'spesialis' => 'Dokter Umum',
-                        'hari' => 'Senin, Rabu, Jumat',
+                        'hari' => 'Senin - Jum at',
                         'jam' => '08:00 - 12:00'
                     ],
                     [
                         'foto' => 'assets/img/dokter2.png',
                         'nama' => 'Dr. Nilam Cahaya Safitri',
-                        'spesialis' => 'Psikologi',
-                        'hari' => 'Selasa & Kamis',
-                        'jam' => '09:00 - 14:00'
+                        'spesialis' => 'Dokter Umum',
+                        'hari' => 'Senin - Jum at',
+                        'jam' => '12:00 - 16:00'
                     ]
                 ];
 
