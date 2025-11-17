@@ -1,50 +1,64 @@
 <?php
- session_start();
+session_start();
 if (isset($_GET['x']) && $_GET['x'] == 'beranda') {
     $page = "beranda.php";
     include "main.php";
 } elseif (isset($_GET['x']) && $_GET['x'] == 'konsultasi') {
-    if($_SESSION['role_eklinik']=='mahasiswa'){
-    $page = "konsultasi.php";
-    include "main.php";
-    }else{
+    if ($_SESSION['role_eklinik'] == 'mahasiswa') {
+        $page = "konsultasi.php";
+        include "main.php";
+    } else {
         $page = "beranda.php";
-    include "main.php";
+        include "main.php";
     }
-
 } elseif (isset($_GET['x']) && $_GET['x'] == 'riwayatkonsultasi') {
-    if($_SESSION['role_eklinik']=='admin' || $_SESSION['role_eklinik']=='mahasiswa'){
-    $page = "riwayatkonsultasi.php";
-    include "main.php";
-    }else{
-      $page = "beranda.php";
-    include "main.php";   
+    if ($_SESSION['role_eklinik'] == 'admin' || $_SESSION['role_eklinik'] == 'mahasiswa') {
+        $page = "riwayatkonsultasi.php";
+        include "main.php";
+    } else {
+        $page = "beranda.php";
+        include "main.php";
     }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'datamedis') {
     $page = "datamedis.php";
     include "main.php";
-    
+} elseif (isset($_GET['x']) && $_GET['x'] == 'datamedis_mahasiswa') {
+    if ($_SESSION['role_eklinik'] == 'petugas klinik') {
+        $page = "datamedis_mahasiswa.php";
+        include "main.php";
+    } else {
+        $page = "beranda.php";
+        include "main.php";
+    }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'konsultasimasuk') {
-    if($_SESSION['role_eklinik']=='petugas klinik' || $_SESSION['role_eklinik']=='mahasiswa'){
-      $page = "konsultasimasuk.php";
-      include "main.php";
-    }else{
-      $page = "beranda.php";
-    include "main.php"; 
+    if ($_SESSION['role_eklinik'] == 'petugas klinik' || $_SESSION['role_eklinik'] == 'mahasiswa') {
+        $page = "konsultasimasuk.php";
+        include "main.php";
+    } else {
+        $page = "beranda.php";
+        include "main.php";
     }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'user') {
-    if($_SESSION['role_eklinik']=='admin'){
+    if ($_SESSION['role_eklinik'] == 'admin') {
         $page = "user.php";
         include "main.php";
-    }else{
+    } else {
         $page = "beranda.php";
-        include "main.php";  
+        include "main.php";
+    }
+} elseif (isset($_GET['x']) && $_GET['x'] == 'jadwal_petugas') {
+    if ($_SESSION['role_eklinik'] == 'admin') {
+        $page = "jadwal_petugas.php";
+        include "main.php";
+    } else {
+        $page = "beranda.php";
+        include "main.php";
     }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'report') {
-    if($_SESSION['role_eklinik']=='admin'){
-       $page = "report.php";
-       include "main.php";
-    }else{
+    if ($_SESSION['role_eklinik'] == 'admin') {
+        $page = "report.php";
+        include "main.php";
+    } else {
         $page = "beranda.php";
         include "main.php";
     }
@@ -56,6 +70,3 @@ if (isset($_GET['x']) && $_GET['x'] == 'beranda') {
     $page = "beranda.php";
     include "main.php";
 }
-?>
-
-           

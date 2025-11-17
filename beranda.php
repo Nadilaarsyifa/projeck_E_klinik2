@@ -11,14 +11,14 @@
         </div>
         <div class="carousel-inner rounded">
             <div class="carousel-item active">
-                <img src="assets/img/gambar klinik.jpg" class="d-block w-100" style="height: 300px; object-fit: cover;">
+                <img src="assets/img/poli2.jpg" class="d-block w-100" style="height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Selamat Datang di E-Klinik</h5>
                     <p>Layanan kesehatan mahasiswa dan civitas akademika.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="assets/img/fasilitas.jpg" class="d-block w-100" style="height: 300px; object-fit: cover;" alt="Fasilitas Lengkap">
+                <img src="assets/img/klinik.jpg" class="d-block w-100" style="height: 300px; object-fit: cover;" alt="Fasilitas Lengkap">
                 <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
                     <h5>Fasilitas Klinik Lengkap</h5>
                     <p>Tersedia ruang periksa, layanan psikologi, dan ruang tunggu yang nyaman.</p>
