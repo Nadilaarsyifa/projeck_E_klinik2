@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Nov 2025 pada 01.52
+-- Waktu pembuatan: 21 Nov 2025 pada 15.00
 -- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.0.30
+-- Versi PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -88,7 +88,16 @@ CREATE TABLE `jadwal_petugas_klinik` (
 --
 
 INSERT INTO `jadwal_petugas_klinik` (`id_jadwal`, `id_petugas`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
-(12, '2023573010000', 'Senin', '08:00:00', '17:00:00');
+(13, '10003', 'Senin', '08:00:00', '12:00:00'),
+(14, '2023573010000', 'Senin', '12:00:00', '16:00:00'),
+(15, '2023573010000', 'Selasa', '08:00:00', '12:00:00'),
+(16, '10003', 'Selasa', '12:00:00', '16:00:00'),
+(17, '10003', 'Rabu', '08:00:00', '12:00:00'),
+(18, '2023573010000', 'Rabu', '12:00:00', '16:00:00'),
+(19, '2023573010000', 'Kamis', '08:00:00', '12:00:00'),
+(20, '10003', 'Kamis', '12:00:00', '16:00:00'),
+(21, '10003', 'Jumat', '08:00:00', '12:00:00'),
+(22, '2023573010000', 'Jumat', '12:00:00', '16:00:00');
 
 -- --------------------------------------------------------
 
@@ -106,6 +115,23 @@ CREATE TABLE `konsultasi` (
   `nim` varchar(50) DEFAULT NULL,
   `id_petugas` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `konsultasi`
+--
+
+INSERT INTO `konsultasi` (`id_konsultasi`, `tgl_konsultasi`, `keluhan_utama`, `lama_keluhan`, `riwayat_pengobatan_sendiri`, `catatan_mahasiswa`, `nim`, `id_petugas`) VALUES
+(1, '2025-11-17 09:31:40', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000'),
+(2, '2025-11-17 09:34:22', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000'),
+(3, '2025-11-21 15:22:00', 'sakit perut', '2 jam', 'tidak ada', 'sakit perut seperti diputar-putar', '2023573010011', '10003'),
+(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '10003'),
+(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003'),
+(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003'),
+(7, '2025-11-21 20:42:00', 'sakit perut', '2 jam', 'tidak adsa', ' melilit', '2023573010014', '10003'),
+(8, '2025-11-21 20:44:00', 'ere', '2 jam', 'er', 'rew', '2023573010014', '10003'),
+(9, '2025-11-21 20:44:00', 'pusing', '1 jam', 'menggunakan minyak kayu putih', 'sakit nyee', '2023573010016', '10003'),
+(10, '2025-11-21 20:48:00', 'muntah', '2 jam', 'tidak ada', 'muak ', '2023573010016', '10003'),
+(11, '2025-11-21 20:55:00', 'pegal linu', '1 jam', 'tidak ada', 'nyeri eperti ditusuk', '2023573010015', '2023573010000');
 
 -- --------------------------------------------------------
 
@@ -310,13 +336,13 @@ ALTER TABLE `data_medis_mahasiswa`
 -- AUTO_INCREMENT untuk tabel `jadwal_petugas_klinik`
 --
 ALTER TABLE `jadwal_petugas_klinik`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `konsultasi`
 --
 ALTER TABLE `konsultasi`
-  MODIFY `id_konsultasi` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_konsultasi` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tindak_lanjut`
