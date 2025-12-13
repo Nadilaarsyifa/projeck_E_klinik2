@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Nov 2025 pada 15.00
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.1.25
+-- Generation Time: Dec 13, 2025 at 03:28 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data_medis_mahasiswa`
+-- Table structure for table `data_medis_mahasiswa`
 --
 
 CREATE TABLE `data_medis_mahasiswa` (
@@ -40,7 +40,7 @@ CREATE TABLE `data_medis_mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `data_medis_mahasiswa`
+-- Dumping data for table `data_medis_mahasiswa`
 --
 
 INSERT INTO `data_medis_mahasiswa` (`id_data_medis`, `nim`, `alergi`, `gol_dar`, `riwayat_penyakit`, `tinggi_badan`, `berat_badan`, `alat_bantu`, `kontak_darurat`) VALUES
@@ -72,7 +72,7 @@ INSERT INTO `data_medis_mahasiswa` (`id_data_medis`, `nim`, `alergi`, `gol_dar`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jadwal_petugas_klinik`
+-- Table structure for table `jadwal_petugas_klinik`
 --
 
 CREATE TABLE `jadwal_petugas_klinik` (
@@ -84,7 +84,7 @@ CREATE TABLE `jadwal_petugas_klinik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `jadwal_petugas_klinik`
+-- Dumping data for table `jadwal_petugas_klinik`
 --
 
 INSERT INTO `jadwal_petugas_klinik` (`id_jadwal`, `id_petugas`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
@@ -102,7 +102,7 @@ INSERT INTO `jadwal_petugas_klinik` (`id_jadwal`, `id_petugas`, `hari`, `jam_mul
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `konsultasi`
+-- Table structure for table `konsultasi`
 --
 
 CREATE TABLE `konsultasi` (
@@ -113,30 +113,31 @@ CREATE TABLE `konsultasi` (
   `riwayat_pengobatan_sendiri` text DEFAULT NULL,
   `catatan_mahasiswa` text DEFAULT NULL,
   `nim` varchar(50) DEFAULT NULL,
-  `id_petugas` varchar(50) DEFAULT NULL
+  `id_petugas` varchar(50) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `konsultasi`
+-- Dumping data for table `konsultasi`
 --
 
-INSERT INTO `konsultasi` (`id_konsultasi`, `tgl_konsultasi`, `keluhan_utama`, `lama_keluhan`, `riwayat_pengobatan_sendiri`, `catatan_mahasiswa`, `nim`, `id_petugas`) VALUES
-(1, '2025-11-17 09:31:40', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000'),
-(2, '2025-11-17 09:34:22', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000'),
-(3, '2025-11-21 15:22:00', 'sakit perut', '2 jam', 'tidak ada', 'sakit perut seperti diputar-putar', '2023573010011', '10003'),
-(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '10003'),
-(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003'),
-(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003'),
-(7, '2025-11-21 20:42:00', 'sakit perut', '2 jam', 'tidak adsa', ' melilit', '2023573010014', '10003'),
-(8, '2025-11-21 20:44:00', 'ere', '2 jam', 'er', 'rew', '2023573010014', '10003'),
-(9, '2025-11-21 20:44:00', 'pusing', '1 jam', 'menggunakan minyak kayu putih', 'sakit nyee', '2023573010016', '10003'),
-(10, '2025-11-21 20:48:00', 'muntah', '2 jam', 'tidak ada', 'muak ', '2023573010016', '10003'),
-(11, '2025-11-21 20:55:00', 'pegal linu', '1 jam', 'tidak ada', 'nyeri eperti ditusuk', '2023573010015', '2023573010000');
+INSERT INTO `konsultasi` (`id_konsultasi`, `tgl_konsultasi`, `keluhan_utama`, `lama_keluhan`, `riwayat_pengobatan_sendiri`, `catatan_mahasiswa`, `nim`, `id_petugas`, `status`) VALUES
+(1, '2025-11-17 09:31:40', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000', 'SUDAH DIBALAS'),
+(2, '2025-11-17 09:34:22', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000', 'SUDAH DIBALAS'),
+(3, '2025-11-21 15:22:00', 'sakit perut', '2 jam', 'tidak ada', 'sakit perut seperti diputar-putar', '2023573010011', '10003', NULL),
+(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '10003', NULL),
+(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003', NULL),
+(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003', NULL),
+(7, '2025-11-21 20:42:00', 'sakit perut', '2 jam', 'tidak adsa', ' melilit', '2023573010014', '10003', NULL),
+(8, '2025-11-21 20:44:00', 'ere', '2 jam', 'er', 'rew', '2023573010014', '10003', NULL),
+(9, '2025-11-21 20:44:00', 'pusing', '1 jam', 'menggunakan minyak kayu putih', 'sakit nyee', '2023573010016', '10003', NULL),
+(10, '2025-11-21 20:48:00', 'muntah', '2 jam', 'tidak ada', 'muak ', '2023573010016', '10003', NULL),
+(11, '2025-11-21 20:55:00', 'pegal linu', '1 jam', 'tidak ada', 'nyeri eperti ditusuk', '2023573010015', '2023573010000', 'SUDAH DIBALAS');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mahasiswa`
+-- Table structure for table `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -151,7 +152,7 @@ CREATE TABLE `mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `mahasiswa`
+-- Dumping data for table `mahasiswa`
 --
 
 INSERT INTO `mahasiswa` (`nim`, `nama`, `jurusan`, `prodi`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `no_hp`) VALUES
@@ -185,7 +186,7 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `jurusan`, `prodi`, `tgl_lahir`, `jenis_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `petugas_klinik`
+-- Table structure for table `petugas_klinik`
 --
 
 CREATE TABLE `petugas_klinik` (
@@ -198,7 +199,7 @@ CREATE TABLE `petugas_klinik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `petugas_klinik`
+-- Dumping data for table `petugas_klinik`
 --
 
 INSERT INTO `petugas_klinik` (`id_petugas`, `nama`, `jenis_kelamin`, `spesialis`, `no_hp`, `alamat`) VALUES
@@ -208,7 +209,7 @@ INSERT INTO `petugas_klinik` (`id_petugas`, `nama`, `jenis_kelamin`, `spesialis`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tindak_lanjut`
+-- Table structure for table `tindak_lanjut`
 --
 
 CREATE TABLE `tindak_lanjut` (
@@ -222,10 +223,19 @@ CREATE TABLE `tindak_lanjut` (
   `id_petugas` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tindak_lanjut`
+--
+
+INSERT INTO `tindak_lanjut` (`id_tindak_lanjut`, `tgl_tindak_lanjut`, `diagnosa`, `resep_obat`, `saran_perawatan`, `id_konsultasi`, `nim`, `id_petugas`) VALUES
+(2, '2025-11-22 11:22:00', 'sakit mental', 'baigon', 'berobat sendiri', 11, '2023573010015', '2023573010000'),
+(3, '2025-11-22 11:30:00', 'saya gak tau', 'anatasid', 'tanya dokter', 2, '2023573010011', '2023573010000'),
+(6, '2025-11-22 05:44:19', 'penyakit jompo', 'vitamin', 'olahraga', 1, '2023573010011', '2023573010000');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -235,7 +245,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`username`, `password`, `role`) VALUES
@@ -274,21 +284,21 @@ INSERT INTO `user` (`username`, `password`, `role`) VALUES
 --
 
 --
--- Indeks untuk tabel `data_medis_mahasiswa`
+-- Indexes for table `data_medis_mahasiswa`
 --
 ALTER TABLE `data_medis_mahasiswa`
   ADD PRIMARY KEY (`id_data_medis`),
   ADD KEY `nim` (`nim`);
 
 --
--- Indeks untuk tabel `jadwal_petugas_klinik`
+-- Indexes for table `jadwal_petugas_klinik`
 --
 ALTER TABLE `jadwal_petugas_klinik`
   ADD PRIMARY KEY (`id_jadwal`),
   ADD KEY `id_petugas` (`id_petugas`);
 
 --
--- Indeks untuk tabel `konsultasi`
+-- Indexes for table `konsultasi`
 --
 ALTER TABLE `konsultasi`
   ADD PRIMARY KEY (`id_konsultasi`),
@@ -296,19 +306,19 @@ ALTER TABLE `konsultasi`
   ADD KEY `id_petugas` (`id_petugas`);
 
 --
--- Indeks untuk tabel `mahasiswa`
+-- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`nim`);
 
 --
--- Indeks untuk tabel `petugas_klinik`
+-- Indexes for table `petugas_klinik`
 --
 ALTER TABLE `petugas_klinik`
   ADD PRIMARY KEY (`id_petugas`);
 
 --
--- Indeks untuk tabel `tindak_lanjut`
+-- Indexes for table `tindak_lanjut`
 --
 ALTER TABLE `tindak_lanjut`
   ADD PRIMARY KEY (`id_tindak_lanjut`),
@@ -317,76 +327,76 @@ ALTER TABLE `tindak_lanjut`
   ADD KEY `id_petugas` (`id_petugas`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `data_medis_mahasiswa`
+-- AUTO_INCREMENT for table `data_medis_mahasiswa`
 --
 ALTER TABLE `data_medis_mahasiswa`
   MODIFY `id_data_medis` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `jadwal_petugas_klinik`
+-- AUTO_INCREMENT for table `jadwal_petugas_klinik`
 --
 ALTER TABLE `jadwal_petugas_klinik`
   MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT untuk tabel `konsultasi`
+-- AUTO_INCREMENT for table `konsultasi`
 --
 ALTER TABLE `konsultasi`
   MODIFY `id_konsultasi` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `tindak_lanjut`
+-- AUTO_INCREMENT for table `tindak_lanjut`
 --
 ALTER TABLE `tindak_lanjut`
-  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `data_medis_mahasiswa`
+-- Constraints for table `data_medis_mahasiswa`
 --
 ALTER TABLE `data_medis_mahasiswa`
   ADD CONSTRAINT `fk_data_medis_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `jadwal_petugas_klinik`
+-- Constraints for table `jadwal_petugas_klinik`
 --
 ALTER TABLE `jadwal_petugas_klinik`
   ADD CONSTRAINT `jadwal_petugas_klinik_ibfk_1` FOREIGN KEY (`id_petugas`) REFERENCES `petugas_klinik` (`id_petugas`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `konsultasi`
+-- Constraints for table `konsultasi`
 --
 ALTER TABLE `konsultasi`
   ADD CONSTRAINT `fk_konsultasi_mahasiswa` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_konsultasi_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `petugas_klinik` (`id_petugas`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `mahasiswa`
+-- Constraints for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `fk_mahasiswa_user` FOREIGN KEY (`nim`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `petugas_klinik`
+-- Constraints for table `petugas_klinik`
 --
 ALTER TABLE `petugas_klinik`
   ADD CONSTRAINT `fk_petugas_user` FOREIGN KEY (`id_petugas`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tindak_lanjut`
+-- Constraints for table `tindak_lanjut`
 --
 ALTER TABLE `tindak_lanjut`
   ADD CONSTRAINT `fk_tindak_lanjut_konsultasi` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
