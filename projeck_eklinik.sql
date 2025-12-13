@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2025 at 03:28 PM
+-- Generation Time: Dec 13, 2025 at 04:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -88,15 +88,15 @@ CREATE TABLE `jadwal_petugas_klinik` (
 --
 
 INSERT INTO `jadwal_petugas_klinik` (`id_jadwal`, `id_petugas`, `hari`, `jam_mulai`, `jam_selesai`) VALUES
-(13, '10003', 'Senin', '08:00:00', '12:00:00'),
+(13, '2023573011000', 'Senin', '08:00:00', '12:00:00'),
 (14, '2023573010000', 'Senin', '12:00:00', '16:00:00'),
 (15, '2023573010000', 'Selasa', '08:00:00', '12:00:00'),
-(16, '10003', 'Selasa', '12:00:00', '16:00:00'),
-(17, '10003', 'Rabu', '08:00:00', '12:00:00'),
+(16, '2023573011000', 'Selasa', '12:00:00', '16:00:00'),
+(17, '2023573011000', 'Rabu', '08:00:00', '12:00:00'),
 (18, '2023573010000', 'Rabu', '12:00:00', '16:00:00'),
 (19, '2023573010000', 'Kamis', '08:00:00', '12:00:00'),
-(20, '10003', 'Kamis', '12:00:00', '16:00:00'),
-(21, '10003', 'Jumat', '08:00:00', '12:00:00'),
+(20, '2023573011000', 'Kamis', '12:00:00', '16:00:00'),
+(21, '2023573011000', 'Jumat', '08:00:00', '12:00:00'),
 (22, '2023573010000', 'Jumat', '12:00:00', '16:00:00');
 
 -- --------------------------------------------------------
@@ -124,14 +124,14 @@ CREATE TABLE `konsultasi` (
 INSERT INTO `konsultasi` (`id_konsultasi`, `tgl_konsultasi`, `keluhan_utama`, `lama_keluhan`, `riwayat_pengobatan_sendiri`, `catatan_mahasiswa`, `nim`, `id_petugas`, `status`) VALUES
 (1, '2025-11-17 09:31:40', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000', 'SUDAH DIBALAS'),
 (2, '2025-11-17 09:34:22', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000', 'SUDAH DIBALAS'),
-(3, '2025-11-21 15:22:00', 'sakit perut', '2 jam', 'tidak ada', 'sakit perut seperti diputar-putar', '2023573010011', '10003', NULL),
-(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '10003', NULL),
-(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003', NULL),
-(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '10003', NULL),
-(7, '2025-11-21 20:42:00', 'sakit perut', '2 jam', 'tidak adsa', ' melilit', '2023573010014', '10003', NULL),
-(8, '2025-11-21 20:44:00', 'ere', '2 jam', 'er', 'rew', '2023573010014', '10003', NULL),
-(9, '2025-11-21 20:44:00', 'pusing', '1 jam', 'menggunakan minyak kayu putih', 'sakit nyee', '2023573010016', '10003', NULL),
-(10, '2025-11-21 20:48:00', 'muntah', '2 jam', 'tidak ada', 'muak ', '2023573010016', '10003', NULL),
+(3, '2025-11-21 15:22:00', 'sakit perut', '2 jam', 'tidak ada', 'sakit perut seperti diputar-putar', '2023573010011', '2023573011000', NULL),
+(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '2023573011000', NULL),
+(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '2023573011000', NULL),
+(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '2023573011000', NULL),
+(7, '2025-11-21 20:42:00', 'sakit perut', '2 jam', 'tidak adsa', ' melilit', '2023573010014', '2023573011000', 'Selesai'),
+(8, '2025-11-21 20:44:00', 'ere', '2 jam', 'er', 'rew', '2023573010014', '2023573011000', 'SUDAH DIBALAS'),
+(9, '2025-11-21 20:44:00', 'pusing', '1 jam', 'menggunakan minyak kayu putih', 'sakit nyee', '2023573010016', '2023573011000', NULL),
+(10, '2025-11-21 20:48:00', 'muntah', '2 jam', 'tidak ada', 'muak ', '2023573010016', '2023573011000', 'SUDAH DIBALAS'),
 (11, '2025-11-21 20:55:00', 'pegal linu', '1 jam', 'tidak ada', 'nyeri eperti ditusuk', '2023573010015', '2023573010000', 'SUDAH DIBALAS');
 
 -- --------------------------------------------------------
@@ -203,8 +203,8 @@ CREATE TABLE `petugas_klinik` (
 --
 
 INSERT INTO `petugas_klinik` (`id_petugas`, `nama`, `jenis_kelamin`, `spesialis`, `no_hp`, `alamat`) VALUES
-('10003', 'Aminah', 'Perempuan', 'Dokter Umum', '087654321234', 'Punteut'),
-('2023573010000', 'Annisa', 'Perempuan', 'Dokter Umum', '085434321234', 'bayu');
+('2023573010000', 'Annisa', 'Perempuan', 'Dokter Umum', '085434321234', 'bayu'),
+('2023573011000', 'Aminah', 'Perempuan', 'Dokter Umum', '087654321234', 'Punteut');
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,11 @@ CREATE TABLE `tindak_lanjut` (
 INSERT INTO `tindak_lanjut` (`id_tindak_lanjut`, `tgl_tindak_lanjut`, `diagnosa`, `resep_obat`, `saran_perawatan`, `id_konsultasi`, `nim`, `id_petugas`) VALUES
 (2, '2025-11-22 11:22:00', 'sakit mental', 'baigon', 'berobat sendiri', 11, '2023573010015', '2023573010000'),
 (3, '2025-11-22 11:30:00', 'saya gak tau', 'anatasid', 'tanya dokter', 2, '2023573010011', '2023573010000'),
-(6, '2025-11-22 05:44:19', 'penyakit jompo', 'vitamin', 'olahraga', 1, '2023573010011', '2023573010000');
+(6, '2025-11-22 05:44:19', 'penyakit jompo', 'vitamin', 'olahraga', 1, '2023573010011', '2023573010000'),
+(7, '2025-12-13 15:55:16', 'diare', 'Oralit', 'kamu bisa fokus pada rehidrasi (minum banyak oralit/air putih), makan makanan lunak mudah cerna (BRAT diet: pisang, nasi, saus apel, roti tawar), istirahat cukup, serta menghindari makanan pemicu (pedas, berlemak, susu, kafein), sambil menjaga kebersihan diri (cuci tangan) untuk mencegah penyebaran infeksi, dan pertimbangkan probiotik untuk menyeimbangkan bakteri usus. ', 7, '2023573010014', '2023573011000'),
+(8, '2025-12-13 15:57:26', 'diare', 'Oralit', 'kamu bisa fokus pada rehidrasi (minum banyak oralit/air putih), makan makanan lunak mudah cerna (BRAT diet: pisang, nasi, saus apel, roti tawar), istirahat cukup, serta menghindari makanan pemicu (pedas, berlemak, susu, kafein), sambil menjaga kebersihan diri (cuci tangan) untuk mencegah penyebaran infeksi, dan pertimbangkan probiotik untuk menyeimbangkan bakteri usus. ', 7, '2023573010014', '2023573011000'),
+(9, '2025-12-13 16:00:23', 'stress', 'promag', 'tutup laptop lalu scroll tiktok', 10, '2023573010016', '2023573011000'),
+(10, '2025-12-13 16:14:41', 'jhfjhfj', 'dfjhdjf', 'dfhdf', 8, '2023573010014', '2023573011000');
 
 -- --------------------------------------------------------
 
@@ -249,7 +253,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `role`) VALUES
-('10003', '5f4dcc3b5aa765d61d8327deb882cf99', 'petugas klinik'),
 ('2023573010000', '5f4dcc3b5aa765d61d8327deb882cf99', 'petugas klinik'),
 ('2023573010011', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa'),
 ('2023573010012', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa'),
@@ -277,7 +280,8 @@ INSERT INTO `user` (`username`, `password`, `role`) VALUES
 ('2023573010035', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa'),
 ('2023573010040', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa'),
 ('2023573010099', '6843b4ceb6136f35bc53db8bc20b6620', 'admin'),
-('2023573010111', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa');
+('2023573010111', '5f4dcc3b5aa765d61d8327deb882cf99', 'mahasiswa'),
+('2023573011000', '5f4dcc3b5aa765d61d8327deb882cf99', 'petugas klinik');
 
 --
 -- Indexes for dumped tables
@@ -358,7 +362,7 @@ ALTER TABLE `konsultasi`
 -- AUTO_INCREMENT for table `tindak_lanjut`
 --
 ALTER TABLE `tindak_lanjut`
-  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
