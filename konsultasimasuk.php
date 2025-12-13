@@ -11,12 +11,16 @@ if (!isset($_SESSION['username_eklinik'])) {
 
 $id_petugas = $_SESSION['username_eklinik'];
 
-$sql = "SELECT k.*, tl.tgl_tindak_lanjut, tl.diagnosa, tl.resep_obat, tl.saran_perawatan
+// Gunakan prepared statement
+$stmt = mysqli_prepare($conn, "SELECT k.*, tl.tgl_tindak_lanjut, tl.diagnosa, tl.resep_obat, tl.saran_perawatan
         FROM konsultasi k
         LEFT JOIN tindak_lanjut tl ON k.id_konsultasi = tl.id_konsultasi
-        WHERE k.id_petugas = '$id_petugas'
-        ORDER BY k.tgl_konsultasi DESC";
-$result = mysqli_query($conn, $sql);
+        WHERE k.id_petugas = ?
+        ORDER BY k.tgl_konsultasi DESC");
+
+mysqli_stmt_bind_param($stmt, "s", $id_petugas);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 ?>
 
 <style>
@@ -73,74 +77,98 @@ $result = mysqli_query($conn, $sql);
             <i class="bi bi-chat-dots me-2"></i> KONSULTASI MASUK
         </div>
 
-    <div class="card-body">
+        <div class="card-body">
+            
+            <?php
+            // Tampilkan pesan sukses atau error
+            if (isset($_GET['success'])) {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle-fill"></i> Balasan berhasil dikirim!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      </div>';
+            }
+            if (isset($_GET['error'])) {
+                $error_msg = 'Terjadi kesalahan!';
+                if ($_GET['error'] == 'empty') {
+                    $error_msg = 'Semua field harus diisi!';
+                } elseif ($_GET['error'] == 'invalid') {
+                    $error_msg = 'Data tidak valid!';
+                } elseif ($_GET['error'] == 'failed') {
+                    $error_msg = 'Gagal menyimpan data!';
+                }
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i> ' . $error_msg . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      </div>';
+            }
+            ?>
 
-        <table class="table table-bordered table-striped text-center">
-            <thead>
-                <tr>
-                    <th>Tanggal</th>
-                    <th>NIM</th>
-                    <th>Keluhan Utama</th>
-                    <th>Lama Keluhan</th>
-                    <th>Riwayat Pengobatan</th>
-                    <th>Catatan</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>NIM</th>
+                        <th>Keluhan Utama</th>
+                        <th>Lama Keluhan</th>
+                        <th>Riwayat Pengobatan</th>
+                        <th>Catatan</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                <tr>
-                    <td><?= $row['tgl_konsultasi'] ?></td>
-                    <td><?= $row['nim'] ?></td>
-                    <td><?= $row['keluhan_utama'] ?></td>
-                    <td><?= $row['lama_keluhan'] ?></td>
-                    <td><?= $row['riwayat_pengobatan_sendiri'] ?></td>
-                    <td><?= $row['catatan_mahasiswa'] ?></td>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['tgl_konsultasi']) ?></td>
+                        <td><?= htmlspecialchars($row['nim']) ?></td>
+                        <td><?= htmlspecialchars($row['keluhan_utama']) ?></td>
+                        <td><?= htmlspecialchars($row['lama_keluhan']) ?></td>
+                        <td><?= htmlspecialchars($row['riwayat_pengobatan_sendiri']) ?></td>
+                        <td><?= htmlspecialchars($row['catatan_mahasiswa']) ?></td>
 
-                    <td>
-                        <?php if (empty($row['tgl_tindak_lanjut'])): ?>
-                            <span class="badge text-bg-warning px-3 py-2">Masuk</span>
-                        <?php else: ?>
-                            <span class="badge text-bg-success px-3 py-2">Selesai</span>
-                        <?php endif; ?>
-                    </td>
+                        <td>
+                            <?php if (empty($row['tgl_tindak_lanjut'])): ?>
+                                <span class="badge text-bg-warning px-3 py-2">Masuk</span>
+                            <?php else: ?>
+                                <span class="badge text-bg-success px-3 py-2">Selesai</span>
+                            <?php endif; ?>
+                        </td>
 
-                    <td>
-                        <?php if (empty($row['tgl_tindak_lanjut'])): ?>
-                            <button class="btn btn-primary btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#balasModal"
-                                    data-id="<?= $row['id_konsultasi'] ?>"
-                                    data-nim="<?= $row['nim'] ?>">
-                                <i class="bi bi-reply-fill"></i> Balas
-                            </button>
-                        <?php else: ?>
-                            <button class="btn btn-info btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#detailModal"
-                                    data-nim="<?= $row['nim'] ?>"
-                                    data-keluhan="<?= $row['keluhan_utama'] ?>"
-                                    data-lama="<?= $row['lama_keluhan'] ?>"
-                                    data-riwayat="<?= $row['riwayat_pengobatan_sendiri'] ?>"
-                                    data-catatan="<?= $row['catatan_mahasiswa'] ?>"
-                                    data-tgl="<?= $row['tgl_tindak_lanjut'] ?>"
-                                    data-diagnosa="<?= $row['diagnosa'] ?>"
-                                    data-resep="<?= $row['resep_obat'] ?>"
-                                    data-saran="<?= $row['saran_perawatan'] ?>">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                        <td>
+                            <?php if (empty($row['tgl_tindak_lanjut'])): ?>
+                                <button class="btn btn-primary btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#balasModal"
+                                        data-id="<?= htmlspecialchars($row['id_konsultasi']) ?>"
+                                        data-nim="<?= htmlspecialchars($row['nim']) ?>">
+                                    <i class="bi bi-reply-fill"></i> Balas
+                                </button>
+                            <?php else: ?>
+                                <button class="btn btn-info btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#detailModal"
+                                        data-nim="<?= htmlspecialchars($row['nim']) ?>"
+                                        data-keluhan="<?= htmlspecialchars($row['keluhan_utama']) ?>"
+                                        data-lama="<?= htmlspecialchars($row['lama_keluhan']) ?>"
+                                        data-riwayat="<?= htmlspecialchars($row['riwayat_pengobatan_sendiri']) ?>"
+                                        data-catatan="<?= htmlspecialchars($row['catatan_mahasiswa']) ?>"
+                                        data-tgl="<?= htmlspecialchars($row['tgl_tindak_lanjut']) ?>"
+                                        data-diagnosa="<?= htmlspecialchars($row['diagnosa']) ?>"
+                                        data-resep="<?= htmlspecialchars($row['resep_obat']) ?>"
+                                        data-saran="<?= htmlspecialchars($row['saran_perawatan']) ?>">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                    <?php mysqli_stmt_close($stmt); ?>
+                </tbody>
+            </table>
 
+        </div>
     </div>
-</div>
-
 </div>
 
 <!-- MODAL BALAS -->
