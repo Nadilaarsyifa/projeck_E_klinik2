@@ -343,7 +343,120 @@ $total_petugas_aktif = $row_total_petugas['total'];
                 </div>
             </div>
 
-           // 1. Chart Kunjungan per Bulan (Bar Chart)
+            <!-- Grafik 1: Bar Chart - Kunjungan per Bulan -->
+            <div class="chart-card">
+                <h5 class="chart-title">
+                    <i class="bi bi-calendar-range"></i>
+                    Grafik Kunjungan Konsultasi per Bulan (12 Bulan Terakhir)
+                </h5>
+                <?php if(array_sum($bulan_data) > 0): ?>
+                <div class="chart-container">
+                    <canvas id="chartKunjungan"></canvas>
+                </div>
+                <div class="info-stats">
+                    <div class="stat-box">
+                        <span class="stat-number"><?= array_sum($bulan_data); ?></span>
+                        <span class="stat-label">Total Kunjungan</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number"><?= max($bulan_data); ?></span>
+                        <span class="stat-label">Puncak Kunjungan</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number"><?= round(array_sum($bulan_data)/12, 1); ?></span>
+                        <span class="stat-label">Rata-rata/Bulan</span>
+                    </div>
+                </div>
+                <?php else: ?>
+                <div class="empty-chart">
+                    <i class="bi bi-inbox"></i>
+                    <p>Belum ada data kunjungan dalam 12 bulan terakhir</p>
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Grafik 2: Pie Chart - Diagnosa Penyakit Terbanyak -->
+            <div class="chart-card">
+                <h5 class="chart-title">
+                    <i class="bi bi-clipboard2-pulse"></i>
+                    Diagnosa Penyakit Terbanyak (Top 5)
+                </h5>
+                <?php if(count($diagnosa_labels) > 0): ?>
+                <div class="chart-container-pie">
+                    <canvas id="chartDiagnosa"></canvas>
+                </div>
+                <div class="info-stats">
+                    <div class="stat-box">
+                        <span class="stat-number"><?= count($diagnosa_labels); ?></span>
+                        <span class="stat-label">Jenis Diagnosa</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number"><?= array_sum($diagnosa_data); ?></span>
+                        <span class="stat-label">Total Diagnosa</span>
+                    </div>
+                </div>
+                <?php else: ?>
+                <div class="empty-chart">
+                    <i class="bi bi-inbox"></i>
+                    <p>Belum ada data diagnosa</p>
+                    <small class="text-muted">Data diagnosa akan muncul setelah konsultasi mendapat tindak lanjut</small>
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Grafik 3: Pie Chart - Status Konsultasi -->
+            <div class="chart-card">
+                <h5 class="chart-title">
+                    <i class="bi bi-pie-chart-fill"></i>
+                    Status Konsultasi (Selesai vs Menunggu)
+                </h5>
+                <?php if($total_selesai > 0 || $total_menunggu > 0): ?>
+                <div class="chart-container-pie">
+                    <canvas id="chartStatus"></canvas>
+                </div>
+                <div class="info-stats">
+                    <div class="stat-box">
+                        <span class="stat-number" style="color:#198754;"><?= $total_selesai; ?></span>
+                        <span class="stat-label">Selesai</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" style="color:#ffc107;"><?= $total_menunggu; ?></span>
+                        <span class="stat-label">Menunggu</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" style="color:#0dcaf0;">
+                            <?= $total_selesai + $total_menunggu > 0 ? round(($total_selesai/($total_selesai+$total_menunggu))*100, 1) : 0; ?>%
+                        </span>
+                        <span class="stat-label">Tingkat Penyelesaian</span>
+                    </div>
+                </div>
+                <?php else: ?>
+                <div class="empty-chart">
+                    <i class="bi bi-inbox"></i>
+                    <p>Belum ada data konsultasi</p>
+                </div>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+// Konfigurasi Warna
+const primaryColor = '#198754';
+const gradientColors = [
+    'rgba(25, 135, 84, 0.8)',
+    'rgba(13, 202, 240, 0.8)',
+    'rgba(255, 193, 7, 0.8)',
+    'rgba(220, 53, 69, 0.8)',
+    'rgba(13, 110, 253, 0.8)'
+];
+
+// 1. Chart Kunjungan per Bulan (Bar Chart)
 const ctxKunjungan = document.getElementById('chartKunjungan');
 if(ctxKunjungan) {
     const bulanData = <?= json_encode($bulan_data); ?>;
@@ -353,10 +466,6 @@ if(ctxKunjungan) {
         const gradientBar = ctxKunjungan.getContext('2d').createLinearGradient(0, 0, 0, 400);
         gradientBar.addColorStop(0, 'rgba(25, 135, 84, 0.8)');
         gradientBar.addColorStop(1, 'rgba(25, 135, 84, 0.3)');
-
-        // Hitung max value untuk menentukan suggestedMax
-        const maxValue = Math.max(...bulanData);
-        const suggestedMax = Math.ceil(maxValue * 1.2); // Tambah 20% ruang di atas
 
         new Chart(ctxKunjungan, {
             type: 'bar',
@@ -402,16 +511,8 @@ if(ctxKunjungan) {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        // PERBAIKAN: Buat scale otomatis menyesuaikan data
-                        suggestedMax: suggestedMax > 0 ? suggestedMax : 10,
                         ticks: {
-                            // Otomatis menentukan step berdasarkan max value
-                            callback: function(value) {
-                                // Tampilkan hanya bilangan bulat
-                                if (Math.floor(value) === value) {
-                                    return value;
-                                }
-                            },
+                            stepSize: 1,
                             font: { size: 11, weight: '600' }
                         },
                         grid: {
@@ -421,9 +522,7 @@ if(ctxKunjungan) {
                     },
                     x: {
                         ticks: {
-                            font: { size: 11, weight: '600' },
-                            maxRotation: 45,
-                            minRotation: 45
+                            font: { size: 11, weight: '600' }
                         },
                         grid: {
                             display: false
@@ -468,27 +567,7 @@ if(ctxDiagnosa) {
                             padding: 15,
                             font: { size: 12, weight: 'bold' },
                             usePointStyle: true,
-                            pointStyle: 'circle',
-                            // Batasi panjang label
-                            generateLabels: function(chart) {
-                                const data = chart.data;
-                                if (data.labels.length && data.datasets.length) {
-                                    return data.labels.map((label, i) => {
-                                        const value = data.datasets[0].data[i];
-                                        const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                        const percentage = ((value / total) * 100).toFixed(1);
-                                        // Potong label jika terlalu panjang
-                                        const shortLabel = label.length > 25 ? label.substring(0, 25) + '...' : label;
-                                        return {
-                                            text: `${shortLabel} (${percentage}%)`,
-                                            fillStyle: data.datasets[0].backgroundColor[i],
-                                            hidden: false,
-                                            index: i
-                                        };
-                                    });
-                                }
-                                return [];
-                            }
+                            pointStyle: 'circle'
                         }
                     },
                     tooltip: {
@@ -551,24 +630,7 @@ if(ctxStatus) {
                             padding: 15,
                             font: { size: 13, weight: 'bold' },
                             usePointStyle: true,
-                            pointStyle: 'circle',
-                            generateLabels: function(chart) {
-                                const data = chart.data;
-                                if (data.labels.length && data.datasets.length) {
-                                    return data.labels.map((label, i) => {
-                                        const value = data.datasets[0].data[i];
-                                        const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                        const percentage = ((value / total) * 100).toFixed(1);
-                                        return {
-                                            text: `${label}: ${value} (${percentage}%)`,
-                                            fillStyle: data.datasets[0].backgroundColor[i],
-                                            hidden: false,
-                                            index: i
-                                        };
-                                    });
-                                }
-                                return [];
-                            }
+                            pointStyle: 'circle'
                         }
                     },
                     tooltip: {
@@ -597,3 +659,4 @@ if(ctxStatus) {
         });
     }
 }
+</script>
