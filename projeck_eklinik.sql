@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2025 at 04:16 PM
+-- Generation Time: Dec 15, 2025 at 02:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -125,14 +125,16 @@ INSERT INTO `konsultasi` (`id_konsultasi`, `tgl_konsultasi`, `keluhan_utama`, `l
 (1, '2025-11-17 09:31:40', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000', 'SUDAH DIBALAS'),
 (2, '2025-11-17 09:34:22', 'fghf', 'dgd', 'gdg', 'ffd', '2023573010011', '2023573010000', 'SUDAH DIBALAS'),
 (3, '2025-11-21 15:22:00', 'sakit perut', '2 jam', 'tidak ada', 'sakit perut seperti diputar-putar', '2023573010011', '2023573011000', NULL),
-(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '2023573011000', NULL),
-(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '2023573011000', NULL),
-(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '2023573011000', NULL),
+(4, '2025-11-21 15:48:00', 'ndss', 'sbsbf', 'bnsbns', 'fbsnf', '2023573010011', '2023573011000', 'SUDAH DIBALAS'),
+(5, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '2023573011000', 'SUDAH DIBALAS'),
+(6, '2025-11-21 15:50:00', ' vv', 'fg', 'gf', 'f', '2023573010013', '2023573011000', 'SUDAH DIBALAS'),
 (7, '2025-11-21 20:42:00', 'sakit perut', '2 jam', 'tidak adsa', ' melilit', '2023573010014', '2023573011000', 'Selesai'),
 (8, '2025-11-21 20:44:00', 'ere', '2 jam', 'er', 'rew', '2023573010014', '2023573011000', 'SUDAH DIBALAS'),
 (9, '2025-11-21 20:44:00', 'pusing', '1 jam', 'menggunakan minyak kayu putih', 'sakit nyee', '2023573010016', '2023573011000', NULL),
 (10, '2025-11-21 20:48:00', 'muntah', '2 jam', 'tidak ada', 'muak ', '2023573010016', '2023573011000', 'SUDAH DIBALAS'),
-(11, '2025-11-21 20:55:00', 'pegal linu', '1 jam', 'tidak ada', 'nyeri eperti ditusuk', '2023573010015', '2023573010000', 'SUDAH DIBALAS');
+(11, '2025-11-21 20:55:00', 'pegal linu', '1 jam', 'tidak ada', 'nyeri eperti ditusuk', '2023573010015', '2023573010000', 'SUDAH DIBALAS'),
+(12, '2025-12-15 08:02:00', 'pusing, mual-mual, muntah liat icut', '1 jam', 'tidak ada', 'pengen berak terus', '2023573010011', '2023573011000', NULL),
+(13, '2025-12-15 08:04:00', 'mati lampu', '3 minggu', 'nimba air disumur', 'banyak memaki bahlil, tertipu janji bahlil', '2023573010011', '2023573011000', 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -234,7 +236,11 @@ INSERT INTO `tindak_lanjut` (`id_tindak_lanjut`, `tgl_tindak_lanjut`, `diagnosa`
 (7, '2025-12-13 15:55:16', 'diare', 'Oralit', 'kamu bisa fokus pada rehidrasi (minum banyak oralit/air putih), makan makanan lunak mudah cerna (BRAT diet: pisang, nasi, saus apel, roti tawar), istirahat cukup, serta menghindari makanan pemicu (pedas, berlemak, susu, kafein), sambil menjaga kebersihan diri (cuci tangan) untuk mencegah penyebaran infeksi, dan pertimbangkan probiotik untuk menyeimbangkan bakteri usus. ', 7, '2023573010014', '2023573011000'),
 (8, '2025-12-13 15:57:26', 'diare', 'Oralit', 'kamu bisa fokus pada rehidrasi (minum banyak oralit/air putih), makan makanan lunak mudah cerna (BRAT diet: pisang, nasi, saus apel, roti tawar), istirahat cukup, serta menghindari makanan pemicu (pedas, berlemak, susu, kafein), sambil menjaga kebersihan diri (cuci tangan) untuk mencegah penyebaran infeksi, dan pertimbangkan probiotik untuk menyeimbangkan bakteri usus. ', 7, '2023573010014', '2023573011000'),
 (9, '2025-12-13 16:00:23', 'stress', 'promag', 'tutup laptop lalu scroll tiktok', 10, '2023573010016', '2023573011000'),
-(10, '2025-12-13 16:14:41', 'jhfjhfj', 'dfjhdjf', 'dfhdf', 8, '2023573010014', '2023573011000');
+(10, '2025-12-13 16:14:41', 'jhfjhfj', 'dfjhdjf', 'dfhdf', 8, '2023573010014', '2023573011000'),
+(11, '2025-12-13 16:25:45', 'djhfjdhjfhj', 'dfjhdjf', 'kfdjksjfkd', 6, '2023573010013', '2023573011000'),
+(12, '2025-12-13 16:27:31', 'jhdjhfjd', 'fjjvhfvkj', 'vfjkvjkfv', 4, '2023573010011', '2023573011000'),
+(13, '2025-12-13 16:27:44', 'cndbcnbd', 'ckjkc', 'cdjkcjkdc', 5, '2023573010013', '2023573011000'),
+(14, '2025-12-15 02:08:27', 'stress karna janji bahlil', 'berdoa kepada Allah SWT', 'Hidupkan lampu, kuatkan jaringan', 13, '2023573010011', '2023573011000');
 
 -- --------------------------------------------------------
 
@@ -356,13 +362,13 @@ ALTER TABLE `jadwal_petugas_klinik`
 -- AUTO_INCREMENT for table `konsultasi`
 --
 ALTER TABLE `konsultasi`
-  MODIFY `id_konsultasi` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_konsultasi` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tindak_lanjut`
 --
 ALTER TABLE `tindak_lanjut`
-  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_tindak_lanjut` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
