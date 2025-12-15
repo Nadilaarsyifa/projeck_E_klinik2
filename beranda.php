@@ -1,3 +1,19 @@
+<?php
+include "proses/connect.php";
+
+// Query jadwal dokter dari database
+$query_jadwal = mysqli_query($conn, "
+    SELECT pk.nama, pk.spesialis, 
+           GROUP_CONCAT(DISTINCT j.hari ORDER BY FIELD(j.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat') SEPARATOR ', ') as hari,
+           MIN(j.jam_mulai) as jam_mulai,
+           MAX(j.jam_selesai) as jam_selesai
+    FROM petugas_klinik pk
+    INNER JOIN jadwal_petugas_klinik j ON pk.id_petugas = j.id_petugas
+    GROUP BY pk.id_petugas, pk.nama, pk.spesialis
+    ORDER BY pk.nama
+");
+?>
+
 <div class="col-lg-9 mt-2">
     <!-- Carousel -->
     <div id="carouselExampleCaptions" class="carousel slide mb-4" data-bs-ride="carousel">
@@ -66,114 +82,103 @@
         </div>
     </div>
 
-    <!-- Jadwal Dokter (Versi dengan Foto) -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-header text-white" style="background-color: #14532d;">
-            <i class="bi bi-calendar-check me-2"></i> Jadwal Dokter
+    <!-- Jadwal Dokter (Otomatis dari Database) -->
+    <div class="card shadow-sm mb-4" style="border: none; border-radius: 12px;">
+        <div class="card-header text-white" style="background-color: #14532d; border-radius: 12px 12px 0 0; padding: 15px 20px;">
+            <h5 class="mb-0"><i class="bi bi-calendar-check me-2"></i> Jadwal Dokter</h5>
         </div>
-        <div class="card-body">
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <?php
-                $jadwal = [
-                    [
-                        'foto' => 'assets/img/dokter1.jpeg',
-                        'nama' => 'Dr. Andi Wijaya',
-                        'spesialis' => 'Dokter Umum',
-                        'hari' => 'Senin - Jum at',
-                        'jam' => '08:00 - 12:00'
-                    ],
-                    [
-                        'foto' => 'assets/img/dokter2.png',
-                        'nama' => 'Dr. Nilam Cahaya Safitri',
-                        'spesialis' => 'Dokter Umum',
-                        'hari' => 'Senin - Jum at',
-                        'jam' => '12:00 - 16:00'
-                    ]
-                ];
-
-                foreach ($jadwal as $dokter) {
-                    echo '
-                    <div class="col">
-                        <div class="card h-100 border-0 shadow-sm">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="'.$dokter['foto'].'" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="'.$dokter['nama'].'">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-1">'.$dokter['nama'].'</h5>
-                                        <p class="card-text mb-1 text-muted">'.$dokter['spesialis'].'</p>
-                                        <p class="card-text mb-1"><i class="bi bi-calendar-event me-1"></i>'.$dokter['hari'].'</p>
-                                        <p class="card-text"><i class="bi bi-clock me-1"></i>'.$dokter['jam'].'</p>
+        <div class="card-body" style="background-color: #f8f9fa; padding: 25px;">
+            <?php 
+            // Query jadwal per hari
+            $query_jadwal_detail = mysqli_query($conn, "
+                SELECT j.hari, j.jam_mulai, j.jam_selesai, pk.nama, pk.spesialis
+                FROM jadwal_petugas_klinik j
+                INNER JOIN petugas_klinik pk ON j.id_petugas = pk.id_petugas
+                ORDER BY FIELD(j.hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'), j.jam_mulai
+            ");
+            
+            // Kelompokkan jadwal per hari
+            $jadwal_per_hari = [];
+            while ($row = mysqli_fetch_assoc($query_jadwal_detail)) {
+                $jadwal_per_hari[$row['hari']][] = $row;
+            }
+            
+            if (empty($jadwal_per_hari)): ?>
+                <div class="text-center py-5">
+                    <i class="bi bi-calendar-x fs-1 text-muted"></i>
+                    <p class="text-muted mt-2">Belum ada jadwal dokter tersedia</p>
+                </div>
+            <?php else: ?>
+                <div class="row g-3">
+                    <?php 
+                    $hari_kerja = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'];
+                    foreach ($hari_kerja as $hari): 
+                        if (isset($jadwal_per_hari[$hari])):
+                    ?>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100" style="border: 2px solid #16a34a; border-radius: 10px; overflow: hidden;">
+                            <div class="card-header text-white text-center" style="background-color: #16a34a; padding: 12px; border: none;">
+                                <h6 class="mb-0 fw-bold"><i class="bi bi-calendar-day me-2"></i><?= $hari ?></h6>
+                            </div>
+                            <div class="card-body bg-white" style="padding: 20px;">
+                                <?php 
+                                $count = count($jadwal_per_hari[$hari]);
+                                $index = 0;
+                                foreach ($jadwal_per_hari[$hari] as $jadwal): 
+                                    $index++;
+                                ?>
+                                <div class="<?= $index < $count ? 'mb-3 pb-3 border-bottom' : '' ?>">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-clock" style="color: #6b7280; font-size: 1.1rem;"></i>
+                                        <span class="ms-2 fw-bold" style="color: #1f2937; font-size: 0.95rem;">
+                                            <?= substr($jadwal['jam_mulai'], 0, 5) ?> - <?= substr($jadwal['jam_selesai'], 0, 5) ?>
+                                        </span>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="fw-bold" style="color: #0ea5e9; font-size: 1rem;">
+                                            <?= htmlspecialchars($jadwal['nama']) ?>
+                                        </div>
+                                        <div class="text-muted" style="font-size: 0.875rem;">
+                                            <?= htmlspecialchars($jadwal['spesialis']) ?>
+                                        </div>
                                     </div>
                                 </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                    </div>';
-                }
-                ?>
+                    </div>
+                    <?php 
+                        endif;
+                    endforeach; 
+                    ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- Layanan Unggulan -->
+    <div class="card shadow-sm mt-4 mb-4">
+        <div class="card-header text-white" style="background-color: #14532d;">
+            <i class="bi bi-stars me-2"></i> Layanan Unggulan
+        </div>
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-4 mb-3">
+                    <i class="bi bi-phone-vibrate" style="font-size: 2rem; color:#14532d;"></i>
+                    <h6 class="mt-2">Konsultasi Online</h6>
+                    <p class="text-muted">Konsultasi dari mana saja, kapan saja.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="bi bi-people-fill" style="font-size: 2rem; color:#14532d;"></i>
+                    <h6 class="mt-2">Tenaga Medis Profesional</h6>
+                    <p class="text-muted">Dokter dan perawat berpengalaman.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <i class="bi bi-heart-pulse" style="font-size: 2rem; color:#14532d;"></i>
+                    <h6 class="mt-2">Pelayanan Prima</h6>
+                    <p class="text-muted">Fasilitas lengkap dan modern.</p>
+                </div>
             </div>
         </div>
     </div>
-
-<!-- FAQ (Pertanyaan Umum) -->
-<div class="card shadow-sm mt-4 mb-4">
-  <div class="card-header text-white" style="background-color: #14532d;">
-    <i class="bi bi-question-circle-fill me-2"></i> FAQ - Pertanyaan Umum
-  </div>
-  <div class="card-body">
-    <div class="accordion" id="faqAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-        </h2>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Apakah konsultasi online dikenakan biaya?
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Konsultasi online disediakan gratis untuk seluruh mahasiswa dan staf kampus.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Jam operasional klinik?
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Klinik buka Senin sampai Jumat, pukul 08:00 sampai 16:00.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-
-<!-- Layanan Unggulan -->
-<div class="card shadow-sm mt-4 mb-4">
-  <div class="card-header text-white" style="background-color: #14532d;">
-    <i class="bi bi-stars me-2"></i> Layanan Unggulan
-  </div>
-  <div class="card-body">
-    <div class="row text-center">
-      <div class="col-md-4 mb-3">
-        <i class="bi bi-phone-vibrate" style="font-size: 2rem; color:#14532d;"></i>
-        <h6 class="mt-2">Konsultasi Online</h6>
-        <p class="text-muted">Konsultasi dari mana saja, kapan saja.</p>
-      </div>
-      <div class="col-md-4 mb-3">
-        <i class="bi bi-people-fill" style="font-size: 2rem; color:#14532d;"></i>
-        <h6 class="mt-2">Tenaga Medis Profesional</h6>
-        <p class="text-muted">Dokter dan perawat berpengalaman.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-

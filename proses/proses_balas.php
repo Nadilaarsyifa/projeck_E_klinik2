@@ -47,7 +47,7 @@ try {
     mysqli_stmt_close($stmt);
     
     // Update status konsultasi menggunakan prepared statement
-    $stmt2 = mysqli_prepare($conn, "UPDATE konsultasi SET status='SUDAH DIBALAS' WHERE id_konsultasi=?");
+    $stmt2 = mysqli_prepare($conn, "UPDATE konsultasi SET status='Selesai' WHERE id_konsultasi=?");
     mysqli_stmt_bind_param($stmt2, "s", $id_konsultasi);
     
     if (!mysqli_stmt_execute($stmt2)) {
